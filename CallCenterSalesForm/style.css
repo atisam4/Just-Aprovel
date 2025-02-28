@@ -1,0 +1,18 @@
+/* Existing styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.png'); /* Set the background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+}
+
+/* New styles for approved and rejected tasks */
+.approved {
+    background-color: lightgreen; /* Green background for approved tasks */
+    color: black; /* Text color for better visibility */
+}
+
+.rejected {
+    background-color: lightcoral; /* Red background for rejected tasks */
+    color: black; /* Text color for better visibility */
+}
