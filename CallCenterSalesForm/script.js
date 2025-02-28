@@ -10,9 +10,8 @@ form.addEventListener('submit', function(event) {
     const approvalInput = document.querySelector('input[name="approval"]:checked');
             const salesNameInput = document.getElementById('salesName').value;
             const newTask = document.createElement('li');
-            newTask.textContent = `${salesNameInput}: ${taskInput.value}`;
+            newTask.textContent = `${salesNameInput}: ${taskInput.value}`; // Corrected to include sales name
 
-    newTask.textContent = taskInput.value;
 
     if (approvalInput) {
         if (approvalInput.value === 'approve') {
