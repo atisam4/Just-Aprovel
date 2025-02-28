@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Log Sheet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Daily Log Sheet</h1>
+    <label for="logDate">Log Date:</label>
+    <input type="date" id="logDate" name="logDate" required><br>
+
+    <form id="logForm">  
+        <label for="salesName">Select Sales Name:</label><br>
+        <select id="salesName" name="salesName" required>
+            <option value="">--Select Sales Name--</option>
+            <option value="Salesperson1">Salesperson 1</option>
+            <option value="Salesperson2">Salesperson 2</option>
+            <option value="Salesperson3">Salesperson 3</option>
+            <option value="Salesperson4">Salesperson 4</option>
+            <option value="Salesperson5">Salesperson 5</option>
+            <option value="Salesperson6">Salesperson 6</option>
+            <option value="Salesperson7">Salesperson 7</option>
+            <option value="Salesperson8">Salesperson 8</option>
+            <option value="Salesperson9">Salesperson 9</option>
+            <option value="Salesperson10">Salesperson 10</option>
+
+        </select><br>
+
+        <label for="approval">Approval:</label><br>
+        <input type="radio" id="approve" name="approval" value="approve">
+        <label for="approve">Approve</label><br>
+        <input type="radio" id="reject" name="approval" value="reject">
+        <label for="reject">Reject</label><br>
+
+        <label for="task">Enter your task:</label><br>
+        <textarea id="task" name="task" rows="4" cols="50" required></textarea><br>
+        <button type="submit">Save Task</button>
+    </form>
+    <h2>Search Tasks</h2>
+    <label for="searchName">Search by Name:</label>
+    <input type="text" id="searchName" name="searchName"><br>
+    <label for="searchDate">Search by Date:</label>
+    <input type="date" id="searchDate" name="searchDate"><br>
+    <button id="searchButton">Search</button>
+    <h2>Tasks</h2>
+
+    <h3>Saved Tasks</h3>
+    <div id="searchResults"></div>
+
+    <ul id="taskList"></ul>
+    <h3>Notes</h3>
+    <ul id="noteList"></ul>
+
+    <script>
+        const noteList = document.getElementById('noteList');
+        
+        function addNote() {
+            const noteInput = document.getElementById('note');
+            const newNote = document.createElement('li');
+            newNote.textContent = noteInput.value;
+            noteList.appendChild(newNote);
+            noteInput.value = '';
+        }
+
+        const form = document.getElementById('logForm');
+        const searchButton = document.getElementById('searchButton');
+        const taskList = document.getElementById('taskList');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const taskInput = document.getElementById('task');
+            const newTask = document.createElement('li');
+            newTask.textContent = taskInput.value;
+            taskList.appendChild(newTask);
+            taskInput.value = '';
+        });
+
+        function searchTasks() {
+            const searchName = document.getElementById('searchName').value.toLowerCase();
+            const searchDate = document.getElementById('searchDate').value;
+            const tasks = taskList.getElementsByTagName('li');
+            const results = [];
+
+            for (let i = 0; i < tasks.length; i++) {
+                const taskText = tasks[i].textContent.toLowerCase();
+                // Assuming tasks are saved in a format that includes the date
+                if (taskText.includes(searchName) && (searchDate === "" || taskText.includes(searchDate))) {
+                    results.push(tasks[i].textContent);
+                }
+            }
+
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = results.length > 0 ? results.map(task => `<li>${task}</li>`).join('') : 'No tasks found';
+        }
+
+        searchButton.addEventListener('click', searchTasks);
+    </script>
+
+</body>
+</html>
